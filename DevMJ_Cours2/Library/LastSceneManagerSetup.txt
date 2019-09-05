@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/AurynSky/Desert Pack/Scenes/DemoScene_Desert.unity
+  isLoaded: 1
+  isActive: 1
