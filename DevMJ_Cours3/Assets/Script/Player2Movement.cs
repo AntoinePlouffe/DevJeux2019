@@ -43,6 +43,5 @@ public class Player2Movement : MonoBehaviour
         }
 
         transform.position = m_Movement;
-
     }
 }

@@ -48,11 +48,5 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
         }
-
-        //PlayerJump
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.velocity = new Vector3(0, 10 * JumpHeight * Time.deltaTime, 0);
-        }
     }
 }
