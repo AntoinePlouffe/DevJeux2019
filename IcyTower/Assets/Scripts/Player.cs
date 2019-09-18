@@ -7,59 +7,42 @@ public class Player : MonoBehaviour
     public Rigidbody m_Rigidbody;
     Vector3 velocity = new Vector3();
 
-    public float m_Jump = 0f;
     public float m_Speed = 0f;
-    private bool m_CanJump;
+    public float m_Jump = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
-        /*m_Rigidbody.useGravity = false;
-        m_Rigidbody.isKinematic = true;*/
-        m_CanJump = false;
+        m_Rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Player movement
-        velocity = m_Rigidbody.velocity;
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.A))
         {
-            velocity.x = m_Speed;
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            velocity.x = -m_Speed;
-        }
-        else
-        {
-            velocity.x = 0f;
+            transform.Translate(Vector3.left * m_Speed * Time.deltaTime);
         }
 
-        //player jump
-        if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKey(KeyCode.D))
         {
-            if (m_CanJump)
-            {
-                m_Rigidbody.AddForce(0f, m_Jump, 0f);
-                m_CanJump = false;
-            }
+            transform.Translate(Vector3.right * m_Speed * Time.deltaTime);
         }
-    }
 
-    private void FixedUpdate()
-    {
-       /* velocity = m_Rigidbody.velocity;
-        velocity.x = 1f;*/
 
-        m_Rigidbody.velocity = velocity;
+        LayerMask mask = LayerMask.GetMask("Win");
+        Debug.DrawRay(transform.position, new Vector3(0f, -0.6f, 0f), Color.red);
 
-        
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        m_CanJump = true;
-        Debug.Log("J'ai touché au sol");
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out hit, 0.6f) && Input.GetKeyDown(KeyCode.Space))
+        {
+            m_Rigidbody.AddForce(0f, m_Jump, 0f);
+            Debug.Log("j'ai toucher un objet");
+        }
+        else if (Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out hit, 0.6f, mask))
+        {
+            m_Speed = 0f;
+            m_Jump = 0f;
+        }
     }
 }
