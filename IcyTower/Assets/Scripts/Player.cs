@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //playerMovement
         if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(Vector3.left * m_Speed * Time.deltaTime);
@@ -30,7 +31,7 @@ public class Player : MonoBehaviour
         }
 
 
-        LayerMask mask = LayerMask.GetMask("Win");
+        //PlayerJump
         Debug.DrawRay(transform.position, new Vector3(0f, -0.6f, 0f), Color.red);
 
         RaycastHit hit;
@@ -39,10 +40,14 @@ public class Player : MonoBehaviour
             m_Rigidbody.AddForce(0f, m_Jump, 0f);
             Debug.Log("j'ai toucher un objet");
         }
-        else if (Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out hit, 0.6f, mask))
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "END")
         {
-            m_Speed = 0f;
-            m_Jump = 0f;
+            m_Speed = 0;
+            m_Jump = 0;
         }
     }
 }
