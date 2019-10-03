@@ -1445,6 +1445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 23463715}
   text: {fileID: 1428513027}
+  text2: {fileID: 0}
 --- !u!65 &1124624031
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3140,6 +3141,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Speed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8314288606867219974, guid: fa692c6045099ff48b809bef3493814c,
+        type: 3}
+      propertyPath: m_Start.y
+      value: 5.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 8314288606867219974, guid: fa692c6045099ff48b809bef3493814c,
+        type: 3}
+      propertyPath: m_Start.z
+      value: -10.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 8314288606867219974, guid: fa692c6045099ff48b809bef3493814c,
+        type: 3}
+      propertyPath: m_End.y
+      value: 34.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 8314288606867219974, guid: fa692c6045099ff48b809bef3493814c,
+        type: 3}
+      propertyPath: m_End.z
+      value: -10.47
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa692c6045099ff48b809bef3493814c, type: 3}
