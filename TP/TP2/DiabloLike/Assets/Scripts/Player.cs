@@ -4,56 +4,38 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public GameObject player; //the player
+    public bool m_flag = false;
+
+    public GameObject player; //Players
 
     public Camera m_Camera;
 
-    private Vector3 m_StartPos;
+    private Vector3 m_Start;
+
     private Vector3 m_EndPos;
-    public float m_ProgressionPercentage;
 
-    private float m_Distance;
-
-    private Coroutine m_MoveCoroutine;
-
-
-
-
+    private float m_distance = 0f;
+    public float m_progression = 0f;
 
     void Update()
     {
+        m_Start = transform.position;  //players position
+
         if (Input.GetMouseButtonDown(0))
         {
+            RaycastHit clickHit;
             Ray moveRay = m_Camera.ScreenPointToRay(Input.mousePosition);
 
-            RaycastHit hit; //create a raycast
-            if (Physics.Raycast(moveRay, out hit, 1000f, LayerMask.GetMask("Ground")))
+            if (Physics.Raycast(moveRay, out clickHit, 1000f, LayerMask.GetMask("Ground")))
             {
-                m_StartPos = transform.position;
-                m_EndPos = hit.point;
-                m_Distance = Vector3.Distance(m_StartPos, m_EndPos);
-                m_ProgressionPercentage = 0f;
+                m_EndPos = clickHit.point;
 
-                if (m_MoveCoroutine != null)
-                {
-                    StopCoroutine("Move");
-                }
+                m_distance = Vector3.Distance(m_Start, m_EndPos);
 
-                m_MoveCoroutine = StartCoroutine("Move");
+                m_progression += Time.deltaTime / m_distance;
+
+                transform.position = Vector3.Lerp(m_Start, m_EndPos, 1 / m_progression);
             }
-        }
-
-    }
-  
-    IEnumerator Move()
-    {
-
-        while (m_ProgressionPercentage < 1f)
-        {
-            m_ProgressionPercentage += 5f * Time.deltaTime / m_Distance;
-            transform.position = Vector3.Lerp(m_StartPos, m_EndPos, m_ProgressionPercentage);
-
-            yield return null;
         }
     }
 
