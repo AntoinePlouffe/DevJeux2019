@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Rigidbody: {fileID: 3190692086215520106}
-  m_Speed: 10
+  m_Speed: 8
   m_Jump: 340
 --- !u!1 &3190692086923812453
 GameObject:
