@@ -4,39 +4,57 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public bool m_flag = false;
+    public float m_speed; 
+    private Vector3 m_position; //(x,y,z)
+    private bool ismoving; //true or false
+  
 
-    public GameObject player; //Players
+    private void Start()
+    {
+        m_position = transform.position; //m_position = (0,0,4)
+        ismoving = false;
+    }
 
-    public Camera m_Camera;
-
-    private Vector3 m_Start;
-
-    private Vector3 m_EndPos;
-
-    private float m_distance = 0f;
-    public float m_progression = 0f;
 
     void Update()
     {
-        m_Start = transform.position;  //players position
-
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            RaycastHit clickHit;
-            Ray moveRay = m_Camera.ScreenPointToRay(Input.mousePosition);
+            LocatePosition();
 
-            if (Physics.Raycast(moveRay, out clickHit, 1000f, LayerMask.GetMask("Ground")))
-            {
-                m_EndPos = clickHit.point;
-
-                m_distance = Vector3.Distance(m_Start, m_EndPos);
-
-                m_progression += Time.deltaTime / m_distance;
-
-                transform.position = Vector3.Lerp(m_Start, m_EndPos, 1 / m_progression);
-            }
+            
         }
+
+        MoveToPosition();
+
+        if (m_position.y > 0)
+        {
+            m_position.y = 0f;
+        }
+
+    }
+
+    void LocatePosition()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000f) && hit.transform.gameObject.tag == "Ground")
+        {
+            m_position = hit.point;
+        }
+        ismoving = true;
+    }
+
+    void MoveToPosition()
+    {
+        transform.LookAt(m_position);
+        transform.position = Vector3.MoveTowards(transform.position, m_position, m_speed * Time.deltaTime);
+
+        if (transform.position == m_position)
+        {
+            ismoving = false;
+        }
+        
     }
 
 }

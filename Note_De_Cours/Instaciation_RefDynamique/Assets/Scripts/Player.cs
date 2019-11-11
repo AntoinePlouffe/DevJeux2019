@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject ball_GO = GameObject.Instantiate(m_ObjectToSpawn, Vector3.up * 2f, Quaternion.identity);
+            GameObject ball_GO = GameObject.Instantiate(m_ObjectToSpawn, transform.position * 2f, Quaternion.identity);
 
             Ball maBalle = ball_GO.GetComponent<Ball>();
 
@@ -23,8 +23,6 @@ public class Player : MonoBehaviour
             if(maBalle != null)
             {
                 maBalle.Jump(transform.position.x);
-
-                maBalle.m_MaVariableDeCompteur = 0;
             }
             
         }

@@ -15,7 +15,7 @@ public class Ball : MonoBehaviour
 
     public void Jump(float i_PlayerPositionX)
     {
-        Vector3 force = new Vector3(i_PlayerPositionX, 1f, 0f);
+        Vector3 force = new Vector3(0f, 0f, 1f);
         m_Rigidbody.AddForce(force * 200f);
     }
 

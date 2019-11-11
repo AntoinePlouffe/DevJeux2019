@@ -11,7 +11,7 @@ public class TitleScreen : MonoBehaviour
 
     public void LoadGamePlay()
     {
-        SceneManager.LoadScene("Donjon"); //Change de scene pour Donjon
+        SceneManager.LoadScene(1); //Change de scene pour Donjon
     }
 
     public void QuitGame()
