@@ -14,7 +14,14 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (transform.position.z < -5 || transform.position.z > 100)
+        {
+            Destroy(gameObject);
+        }
+        else if (transform.position.x < -50 || transform.position.x > 50 )
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Shoot(Vector3 i_Gun)
