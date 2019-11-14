@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -588,8 +588,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 562797694}
-  - {fileID: 1410815676}
-  - {fileID: 716400409}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -606,8 +604,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CellDoor: {fileID: 819460880}
-  m_Start: {x: 0.5, y: 2, z: 13}
-  m_End: {x: 0.5, y: -3.12, z: 13}
+  Lever: {fileID: 2029076229}
+  m_StartCellDoor: {x: 0.5, y: 2, z: 13}
+  m_EndCellDoor: {x: 0.5, y: -3.12, z: 13}
+  m_StartLever: {x: 0, y: 0.5, z: 0}
+  m_EndLever: {x: 0, y: 0, z: 0}
   m_Speed: 0.2
   m_Delai: 0
 --- !u!1 &534669902
@@ -704,7 +705,7 @@ GameObject:
   - component: {fileID: 562797696}
   - component: {fileID: 562797695}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -720,7 +721,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.5478306}
-  m_Children: []
+  m_Children:
+  - {fileID: 2029076230}
   m_Father: {fileID: 522212532}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -873,7 +875,7 @@ GameObject:
   - component: {fileID: 716400411}
   - component: {fileID: 716400410}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -890,8 +892,8 @@ Transform:
   m_LocalPosition: {x: 0.39600003, y: 0.478, z: 0}
   m_LocalScale: {x: 0.25406203, y: 0.25406203, z: 0.25406203}
   m_Children: []
-  m_Father: {fileID: 522212532}
-  m_RootOrder: 2
+  m_Father: {fileID: 2029076230}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &716400410
 MeshRenderer:
@@ -1763,7 +1765,7 @@ GameObject:
   - component: {fileID: 1410815678}
   - component: {fileID: 1410815677}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1780,8 +1782,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.11199999, y: 0.6037595, z: 0.112}
   m_Children: []
-  m_Father: {fileID: 522212532}
-  m_RootOrder: 1
+  m_Father: {fileID: 2029076230}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -39.449}
 --- !u!23 &1410815677
 MeshRenderer:
@@ -2343,6 +2345,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &2029076229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2029076230}
+  m_Layer: 0
+  m_Name: Lever
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2029076230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029076229}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1.825382}
+  m_Children:
+  - {fileID: 1410815676}
+  - {fileID: 716400409}
+  m_Father: {fileID: 562797694}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1628965430341941105
 PrefabInstance:
   m_ObjectHideFlags: 0

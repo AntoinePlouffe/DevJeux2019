@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Switch : MonoBehaviour
 {
+
     public GameObject CellDoor;
 
-    public Vector3 m_Start;
-    public Vector3 m_End;
+    public Vector3 m_StartCellDoor;
+    public Vector3 m_EndCellDoor;
 
     public float m_Speed = 0f;
     public float m_Delai = 0f;
@@ -27,17 +28,25 @@ public class Switch : MonoBehaviour
         {
             Debug.Log("Trigger");
 
-
-            while (CellDoor.transform.position != m_End)
-            {
-                m_Percentage += Time.deltaTime * 0.02f;
-
-                CellDoor.transform.position = Vector3.Lerp(m_Start, m_End, m_Percentage);
-            }
+            StartCoroutine(DoorOpen());
 
             SwitchOnOff = true;
-
-            
         }
+    }
+
+    IEnumerator DoorOpen()
+    {
+        Debug.Log("coroutine start");
+
+        while (CellDoor.transform.position != m_EndCellDoor)
+        {
+            m_Percentage += Time.deltaTime * 1.5f;
+
+            CellDoor.transform.position = Vector3.Lerp(m_StartCellDoor, m_EndCellDoor, m_Percentage);
+
+            yield return new WaitForSeconds(.1f);
+        }
+
+       
     }
 }
