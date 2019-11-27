@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float m_speed; 
+    public float m_speed;
+
+    private float m_PlayerHP = 3;
+
     private Vector3 m_position; //(x,y,z)
-    private bool ismoving; //true or false
+
+    public bool m_CanHeMove = true;
   
 
     private void Start()
     {
         m_position = transform.position; //m_position = (0,0,4)
-        ismoving = false;
     }
 
 
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        //Si le joueur appui sur le clic gauche de la souris
+        if (Input.GetMouseButton(0) && m_CanHeMove == true)
         {
             LocatePosition();
 
@@ -32,6 +36,12 @@ public class Player : MonoBehaviour
             m_position.y = 0f;
         }
 
+        if (m_PlayerHP <= 0)
+        {
+
+            FindObjectOfType<GameOverTrigger>().m_GameOverMenu.SetActive(true);
+        }
+
     }
 
     void LocatePosition()
@@ -42,19 +52,25 @@ public class Player : MonoBehaviour
         {
             m_position = hit.point;
         }
-        ismoving = true;
     }
 
     void MoveToPosition()
     {
         transform.LookAt(m_position);
         transform.position = Vector3.MoveTowards(transform.position, m_position, m_speed * Time.deltaTime);
-
-        if (transform.position == m_position)
-        {
-            ismoving = false;
-        }
         
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "EnemyBall")
+        {
+            m_PlayerHP -= 1;
+
+            Debug.Log(m_PlayerHP);
+        }
+     
     }
 
 }
